@@ -1,0 +1,16 @@
+{
+  "name": "km-nav-backend",
+  "version": "1.0.0",
+  "description": "Backend for Kirby-Manchester Indoor Navigation System",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": ["indoor", "navigation", "kirby-manchester"],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}
