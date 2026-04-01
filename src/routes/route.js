@@ -75,6 +75,7 @@ router.post("/", (req, res) => {
       [String(startNode.floor)]: result.path,
     },
     instructions,
+    total_distance: result.distance,
   });
 });
 

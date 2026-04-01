@@ -59,8 +59,9 @@ function App() {
       setShowDirections(true)
       
       // Switch to the floor of the start location if needed
-      if (route.floors && route.floors.length > 0) {
-        setSelectedFloor(route.floors[0])
+      if (route.floors && Object.keys(route.floors).length > 0) {
+        const firstFloor = parseInt(Object.keys(route.floors)[0])
+        setSelectedFloor(firstFloor)
       }
     } catch (err) {
       console.error('Route generation failed:', err)

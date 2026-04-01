@@ -102,6 +102,9 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
   }
 
   const routePath = routeData?.path || []
+  
+  // Convert floors object to array of floor numbers
+  const routeFloors = routeData?.floors ? Object.keys(routeData.floors).map(f => parseInt(f)) : []
 
   return (
     <div className="floor-map-container">
@@ -109,7 +112,7 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
         currentFloor={floor}
         onFloorChange={onFloorChange}
         availableFloors={[1]}
-        routeFloors={routeData?.floors || []}
+        routeFloors={routeFloors}
       />
 
       <div className="map-controls">
