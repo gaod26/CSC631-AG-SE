@@ -1,0 +1,47 @@
+import './DirectionsList.css'
+
+function DirectionsList({ directions = [], distance, onClose }) {
+  if (!directions || directions.length === 0) {
+    return null
+  }
+
+  const formatDistance = (dist) => {
+    if (dist >= 5280) {
+      return `${(dist / 5280).toFixed(2)} mi`
+    }
+    return `${Math.round(dist)} ft`
+  }
+
+  return (
+    <div className="directions-panel">
+      <div className="directions-header">
+        <div>
+          <h3 className="directions-title">Directions</h3>
+          {distance && (
+            <p className="directions-summary">
+              Total distance: <strong>{formatDistance(distance)}</strong>
+            </p>
+          )}
+        </div>
+        <button
+          className="directions-close"
+          onClick={onClose}
+          aria-label="Close directions"
+        >
+          ✕
+        </button>
+      </div>
+
+      <ol className="directions-list">
+        {directions.map((direction, index) => (
+          <li key={index} className="direction-step">
+            <span className="step-number">{index + 1}</span>
+            <span className="step-text">{direction}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+export default DirectionsList
