@@ -43,6 +43,25 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
     setIsPanning(false)
   }
 
+  const handleZoom = (zoomFactor) => {
+    const newZoom = Math.max(0.5, Math.min(3, zoom * zoomFactor))
+    setZoom(newZoom)
+
+    const newWidth = mapWidth / newZoom
+    const newHeight = mapHeight / newZoom
+
+    // Zoom towards center
+    const centerX = viewBox.x + viewBox.width / 2
+    const centerY = viewBox.y + viewBox.height / 2
+
+    setViewBox({
+      x: centerX - newWidth / 2,
+      y: centerY - newHeight / 2,
+      width: newWidth,
+      height: newHeight
+    })
+  }
+
   const handleWheel = (e) => {
     e.preventDefault()
     const delta = e.deltaY > 0 ? 0.9 : 1.1
@@ -118,7 +137,7 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
       <div className="map-controls">
         <button
           className="map-control-button"
-          onClick={() => setZoom(z => Math.min(3, z * 1.2))}
+          onClick={() => handleZoom(1.2)}
           aria-label="Zoom in"
         >
           +
@@ -126,7 +145,7 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
         <span className="zoom-level">{Math.round(zoom * 100)}%</span>
         <button
           className="map-control-button"
-          onClick={() => setZoom(z => Math.max(0.5, z / 1.2))}
+          onClick={() => handleZoom(1 / 1.2)}
           aria-label="Zoom out"
         >
           −
