@@ -1,9 +1,45 @@
 const express = require("express");
-const { getNode, getFloor } = require("../services/graphStore");
+const { getNode, getFloor, getGlobalAdjacency, getGlobalNodeById } = require("../services/graphStore");
 const { dijkstraShortestPath } = require("../services/dijkstra");
 const { buildInstructionsForPath } = require("../services/instructions");
 
 const router = express.Router();
+
+/**
+ * Build a filtered copy of the global adjacency map by removing cross-floor
+ * edges whose destination node is of the given excluded type.
+ * Same-floor edges are always preserved.
+ */
+function buildFilteredAdjacency(globalAdjacency, globalNodeById, excludeType) {
+  const filtered = new Map();
+  for (const [nodeId, neighbors] of globalAdjacency.entries()) {
+    const fromNode = globalNodeById.get(nodeId);
+    const kept = neighbors.filter(({ to }) => {
+      const toNode = globalNodeById.get(to);
+      // Keep if either endpoint is unknown, or if same-floor
+      if (!fromNode || !toNode || fromNode.floor === toNode.floor) return true;
+      // Drop cross-floor edges where the destination is the excluded type
+      return toNode.type !== excludeType;
+    });
+    filtered.set(nodeId, kept);
+  }
+  return filtered;
+}
+
+/**
+ * Group an ordered path array into a plain object keyed by floor number
+ * (as strings). Nodes are appended to the array for their floor in path order.
+ */
+function groupPathByFloor(path, globalNodeById) {
+  const floors = {};
+  for (const nodeId of path) {
+    const node = globalNodeById.get(nodeId);
+    const f = node ? String(node.floor) : "unknown";
+    if (!floors[f]) floors[f] = [];
+    floors[f].push(nodeId);
+  }
+  return floors;
+}
 
 /**
  * POST /route
@@ -42,20 +78,32 @@ router.post("/", (req, res) => {
       .json({ detail: `Node ${destination} does not exist` });
   }
 
-  // Current scope: only same-floor routes (floor 1 data)
-  if (startNode.floor !== destNode.floor) {
-    return res.status(404).json({
-      detail: "Cross-floor routing is not available yet (only floor 1 data loaded)",
-    });
-  }
-
-  const floor = getFloor(startNode.floor);
-  if (!floor) {
-    return res.status(404).json({ detail: `Floor ${startNode.floor} has no data` });
+  // Choose adjacency map: same-floor uses floor-specific graph so cross-floor
+  // edges are not considered; cross-floor uses the global graph, optionally
+  // filtered by the caller's stair/elevator preference.
+  let adjacency;
+  if (startNode.floor === destNode.floor) {
+    const floor = getFloor(startNode.floor);
+    if (!floor) {
+      return res.status(404).json({ detail: `Floor ${startNode.floor} has no data` });
+    }
+    adjacency = floor.adjacency;
+  } else {
+    const globalAdj = getGlobalAdjacency();
+    const globalNBI = getGlobalNodeById();
+    if (preference === "stairs") {
+      // Remove cross-floor elevator edges so only stairwells bridge floors
+      adjacency = buildFilteredAdjacency(globalAdj, globalNBI, "elevator");
+    } else if (preference === "elevator") {
+      // Remove cross-floor stair edges so only elevators bridge floors
+      adjacency = buildFilteredAdjacency(globalAdj, globalNBI, "stairs");
+    } else {
+      adjacency = globalAdj;
+    }
   }
 
   const result = dijkstraShortestPath({
-    adjacency: floor.adjacency,
+    adjacency,
     start,
     goal: destination,
   });
@@ -65,15 +113,15 @@ router.post("/", (req, res) => {
     });
   }
 
+  const globalNodeById = getGlobalNodeById();
+
   const instructions = buildInstructionsForPath({
     path: result.path,
-    nodeById: floor.nodeById,
+    nodeById: globalNodeById,
   });
 
   res.json({
-    floors: {
-      [String(startNode.floor)]: result.path,
-    },
+    floors: groupPathByFloor(result.path, globalNodeById),
     instructions,
   });
 });
