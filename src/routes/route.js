@@ -1,5 +1,5 @@
 const express = require("express");
-const { getNode, getFloor } = require("../services/graphStore");
+const { getNode, getUnifiedGraph } = require("../services/graphStore");
 const { dijkstraShortestPath } = require("../services/dijkstra");
 const { buildInstructionsForPath } = require("../services/instructions");
 
@@ -42,38 +42,41 @@ router.post("/", (req, res) => {
       .json({ detail: `Node ${destination} does not exist` });
   }
 
-  // Current scope: only same-floor routes (floor 1 data)
-  if (startNode.floor !== destNode.floor) {
-    return res.status(404).json({
-      detail: "Cross-floor routing is not available yet (only floor 1 data loaded)",
-    });
-  }
-
-  const floor = getFloor(startNode.floor);
-  if (!floor) {
-    return res.status(404).json({ detail: `Floor ${startNode.floor} has no data` });
-  }
+  // Use unified graph for cross-floor routing
+  const unifiedGraph = getUnifiedGraph();
 
   const result = dijkstraShortestPath({
-    adjacency: floor.adjacency,
+    adjacency: unifiedGraph.adjacency,
     start,
     goal: destination,
   });
+  
   if (!result) {
     return res.status(404).json({
       detail: `No path found from ${start} to ${destination}`,
     });
   }
 
+  // Separate path by floor
+  const pathsByFloor = {};
+  for (const nodeId of result.path) {
+    const node = unifiedGraph.nodeById.get(nodeId);
+    if (node) {
+      const floorKey = String(node.floor);
+      if (!pathsByFloor[floorKey]) {
+        pathsByFloor[floorKey] = [];
+      }
+      pathsByFloor[floorKey].push(nodeId);
+    }
+  }
+
   const instructions = buildInstructionsForPath({
     path: result.path,
-    nodeById: floor.nodeById,
+    nodeById: unifiedGraph.nodeById,
   });
 
   res.json({
-    floors: {
-      [String(startNode.floor)]: result.path,
-    },
+    floors: pathsByFloor,
     instructions,
     total_distance: result.distance,
   });

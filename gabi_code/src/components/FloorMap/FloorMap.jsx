@@ -3,6 +3,7 @@ import { getNodeType, isEdgeInRoute } from '../../utils/graphUtils'
 import FloorSwitcher from '../Controls/FloorSwitcher'
 import FloorDiagram from './FloorDiagram'
 import floor1Data from '../../data/floor1.json'
+import floor2Data from '../../data/floor2.json'
 import nodePositions from '../../data/nodePositions.json'
 import './FloorMap.css'
 
@@ -124,13 +125,44 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
   
   // Convert floors object to array of floor numbers
   const routeFloors = routeData?.floors ? Object.keys(routeData.floors).map(f => parseInt(f)) : []
+  
+  // Get the path for the current floor only
+  const currentFloorPath = routeData?.floors?.[floor] || []
+
+  // Select floor data based on current floor
+  const floorDataMap = {
+    1: floor1Data,
+    2: floor2Data
+  }
+  const currentFloorData = floorDataMap[floor] || floor1Data
+
+  // Filter nodes to only show nodes from the current floor
+  const currentFloorNodes = Object.entries(positions).filter(([nodeId]) => {
+    // Check if node belongs to current floor (nodes with floor number in ID like R201, H201 for floor 2)
+    const floorPrefix = nodeId.match(/^([A-Z]+)(\d)/)
+    if (floorPrefix) {
+      const nodeFloor = parseInt(floorPrefix[2])
+      return nodeFloor === floor
+    }
+    return floor === 1 // Default to floor 1 for nodes without floor prefix
+  })
+  
+  // Highlight stairs/elevators that are transition points in multi-floor routes
+  const isTransitionNode = (nodeId) => {
+    if (!routeData?.floors || routeFloors.length <= 1) return false
+    const nodeType = getNodeType(nodeId)
+    if (nodeType !== 'stairs' && nodeType !== 'elevator') return false
+    
+    // Check if this node appears in the route path
+    return routePath.includes(nodeId)
+  }
 
   return (
     <div className="floor-map-container">
       <FloorSwitcher
         currentFloor={floor}
         onFloorChange={onFloorChange}
-        availableFloors={[1]}
+        availableFloors={[1, 2]}
         routeFloors={routeFloors}
       />
 
@@ -186,16 +218,16 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
         </defs>
 
         {/* Floor Diagram Background */}
-        <FloorDiagram />
+        <FloorDiagram floor={floor} />
 
         {/* Draw edges */}
         <g className="edges">
-          {floor1Data.map((edge, index) => {
+          {currentFloorData.map((edge, index) => {
             const fromPos = positions[edge.from]
             const toPos = positions[edge.to]
             if (!fromPos || !toPos) return null
 
-            const isInRoute = isEdgeInRoute(edge.from, edge.to, routePath)
+            const isInRoute = isEdgeInRoute(edge.from, edge.to, currentFloorPath)
 
             return (
               <line
@@ -215,30 +247,45 @@ function FloorMap({ floor, onFloorChange, routeData, startLocation, destination,
 
         {/* Draw nodes */}
         <g className="nodes">
-          {Object.entries(positions).map(([nodeId, pos]) => (
-            <g key={nodeId} className="node-group" transform={`translate(${pos.x}, ${pos.y})`}>
-              <circle
-                r={getNodeRadius(nodeId)}
-                fill={getNodeColor(nodeId)}
-                stroke="white"
-                strokeWidth="2"
-                className="node"
-                onClick={() => handleNodeClick(nodeId)}
-                style={{ cursor: 'pointer' }}
-              />
-              <text
-                y="-15"
-                textAnchor="middle"
-                fontSize="11"
-                fill="#1f2937"
-                fontWeight="500"
-                className="node-label"
-                pointerEvents="none"
-              >
-                {nodeId}
-              </text>
-            </g>
-          ))}
+          {currentFloorNodes.map(([nodeId, pos]) => {
+            const isInCurrentFloorRoute = currentFloorPath.includes(nodeId)
+            const isTransition = isTransitionNode(nodeId)
+            
+            return (
+              <g key={nodeId} className="node-group" transform={`translate(${pos.x}, ${pos.y})`}>
+                <circle
+                  r={getNodeRadius(nodeId)}
+                  fill={getNodeColor(nodeId)}
+                  stroke={isInCurrentFloorRoute ? '#15803d' : 'white'}
+                  strokeWidth={isInCurrentFloorRoute ? 3 : 2}
+                  className="node"
+                  onClick={() => handleNodeClick(nodeId)}
+                  style={{ cursor: 'pointer' }}
+                />
+                {isTransition && (
+                  <circle
+                    r={getNodeRadius(nodeId) + 5}
+                    fill="none"
+                    stroke="#8b5cf6"
+                    strokeWidth="2"
+                    strokeDasharray="4,4"
+                    className="transition-indicator"
+                  />
+                )}
+                <text
+                  y="-15"
+                  textAnchor="middle"
+                  fontSize="11"
+                  fill="#1f2937"
+                  fontWeight="500"
+                  className="node-label"
+                  pointerEvents="none"
+                >
+                  {nodeId}
+                </text>
+              </g>
+            )
+          })}
         </g>
       </svg>
 

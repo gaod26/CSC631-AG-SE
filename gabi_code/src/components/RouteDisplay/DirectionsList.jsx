@@ -12,6 +12,15 @@ function DirectionsList({ directions = [], distance, onClose }) {
     return `${Math.round(dist)} ft`
   }
 
+  // Check if a direction involves floor transition
+  const isFloorTransition = (direction) => {
+    const lowerDir = direction.toLowerCase()
+    return lowerDir.includes('floor') || 
+           lowerDir.includes('stairs') || 
+           lowerDir.includes('stairwell') ||
+           lowerDir.includes('elevator')
+  }
+
   return (
     <div className="directions-panel">
       <div className="directions-header">
@@ -33,12 +42,21 @@ function DirectionsList({ directions = [], distance, onClose }) {
       </div>
 
       <ol className="directions-list">
-        {directions.map((direction, index) => (
-          <li key={index} className="direction-step">
-            <span className="step-number">{index + 1}</span>
-            <span className="step-text">{direction}</span>
-          </li>
-        ))}
+        {directions.map((direction, index) => {
+          const isTransition = isFloorTransition(direction)
+          return (
+            <li 
+              key={index} 
+              className={`direction-step ${isTransition ? 'floor-transition' : ''}`}
+            >
+              <span className="step-number">{index + 1}</span>
+              <span className="step-text">
+                {isTransition && <span className="transition-icon">🔄 </span>}
+                {direction}
+              </span>
+            </li>
+          )
+        })}
       </ol>
     </div>
   )

@@ -97,6 +97,24 @@
   color: var(--text-primary);
 }
 
+.direction-step.floor-transition {
+  background-color: rgba(139, 92, 246, 0.1);
+  border-left: 3px solid #8b5cf6;
+}
+
+.direction-step.floor-transition .step-number {
+  background-color: #8b5cf6;
+}
+
+.direction-step.floor-transition:hover {
+  background-color: rgba(139, 92, 246, 0.15);
+}
+
+.transition-icon {
+  font-style: normal;
+  margin-right: 0.25rem;
+}
+
 @media (max-width: 768px) {
   .directions-panel {
     position: fixed;

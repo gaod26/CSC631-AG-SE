@@ -1,5 +1,6 @@
 // Floor diagram using the actual image as background
-function FloorDiagram() {
+function FloorDiagram({ floor = 1 }) {
+  // Use the same floor plan image for both floors since they have the same layout
   return (
     <g className="floor-diagram">
       {/* Use the actual floor plan image as background */}

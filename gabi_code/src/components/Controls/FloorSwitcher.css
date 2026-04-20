@@ -17,6 +17,21 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.multi-floor-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: #8b5cf6;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 .floor-tabs {
