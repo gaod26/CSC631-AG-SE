@@ -2,6 +2,9 @@ const express = require("express");
 const { getNode, getFloor, getGlobalAdjacency, getGlobalNodeById } = require("../services/graphStore");
 const { dijkstraShortestPath } = require("../services/dijkstra");
 const { buildInstructionsForPath } = require("../services/instructions");
+const { optionalAuth } = require("../middleware/auth");
+const { saveRoute } = require("../services/history");
+const { estimateTime } = require("../services/timeEstimate");
 
 const router = express.Router();
 
@@ -45,7 +48,7 @@ function groupPathByFloor(path, globalNodeById) {
  * POST /route
  * Body: { start, destination, preference? }
  */
-router.post("/", (req, res) => {
+router.post("/", optionalAuth, (req, res) => {
   const body = req.body || {};
   const start = body.start;
   const destination = body.destination;
@@ -120,10 +123,33 @@ router.post("/", (req, res) => {
     nodeById: globalNodeById,
   });
 
-  res.json({
+  const estimated_time = estimateTime({
+    path: result.path,
+    nodeById: globalNodeById,
+    adjacency: getGlobalAdjacency(),
+  });
+
+  const responseBody = {
     floors: groupPathByFloor(result.path, globalNodeById),
     instructions,
-  });
+    estimated_time,
+  };
+
+  if (req.user) {
+    try {
+      saveRoute({
+        userId: req.user.user_id,
+        start,
+        destination,
+        preference,
+        result: responseBody,
+      });
+    } catch (e) {
+      console.error("Failed to save route history:", e);
+    }
+  }
+
+  res.json(responseBody);
 });
 
 module.exports = router;
