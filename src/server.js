@@ -4,6 +4,8 @@ const floorsRouter = require("./routes/floors");
 const routeRouter = require("./routes/route");
 const searchRouter = require("./routes/search");
 const nearestRouter = require("./routes/nearest");
+const authRouter = require("./routes/auth");
+const historyRouter = require("./routes/history");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -29,6 +31,8 @@ app.use("/floors", floorsRouter);
 app.use("/route", routeRouter);
 app.use("/search", searchRouter);
 app.use("/nearest", nearestRouter);
+app.use("/auth", authRouter);
+app.use("/history", historyRouter);
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", service: "km-nav-backend" });

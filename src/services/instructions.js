@@ -55,10 +55,16 @@ function buildInstructionsForPath({ path, nodeById }) {
       instructions.push(`Continue past Junction ${id}`);
     } else if (kind === "room") {
       instructions.push(`Pass ${nodeDisplay(node)}`);
-    } else if (kind === "elevator") {
-      instructions.push(`Continue toward ${nodeDisplay(node)}`);
-    } else if (kind === "stairs") {
-      instructions.push(`Continue toward ${nodeDisplay(node)}`);
+    } else if (kind === "elevator" || kind === "stairs") {
+      const nextNode = nodeById.get(path[i + 1]);
+      if (nextNode && node && node.floor !== nextNode.floor) {
+        // Floor transition: emit one instruction and skip the landing node.
+        const cleanLabel = (node.label || node.node_id).replace(/\s+Floor\s+\d+$/i, "");
+        instructions.push(`Take ${cleanLabel} from Floor ${node.floor} to Floor ${nextNode.floor}`);
+        i++; // skip the arriving stairs/elevator node on the next floor
+      } else {
+        instructions.push(`Continue toward ${nodeDisplay(node)}`);
+      }
     } else {
       instructions.push(`Continue past ${id}`);
     }
@@ -70,4 +76,3 @@ function buildInstructionsForPath({ path, nodeById }) {
 module.exports = {
   buildInstructionsForPath,
 };
-

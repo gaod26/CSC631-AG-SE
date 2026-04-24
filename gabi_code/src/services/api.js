@@ -8,6 +8,18 @@ const api = axios.create({
   }
 })
 
+// Request interceptor to add JWT token
+api.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('auth_token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  error => Promise.reject(error)
+)
+
 // Response interceptor for error handling
 api.interceptors.response.use(
   response => response,
@@ -21,7 +33,12 @@ api.interceptors.response.use(
       const status = error.response.status
       const detail = error.response.data?.detail
       
-      if (status === 404) {
+      if (status === 401) {
+        // Unauthorized - token expired or invalid
+        localStorage.removeItem('auth_token')
+        localStorage.removeItem('auth_user')
+        throw new Error(detail || 'Session expired. Please login again.')
+      } else if (status === 404) {
         throw new Error(detail || 'Route not found')
       } else if (status === 400) {
         throw new Error(detail || 'Invalid request')

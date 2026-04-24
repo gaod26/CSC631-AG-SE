@@ -1,6 +1,6 @@
 import './DirectionsList.css'
 
-function DirectionsList({ directions = [], distance, onClose }) {
+function DirectionsList({ directions = [], distance, estimatedTime, onClose }) {
   if (!directions || directions.length === 0) {
     return null
   }
@@ -26,11 +26,18 @@ function DirectionsList({ directions = [], distance, onClose }) {
       <div className="directions-header">
         <div>
           <h3 className="directions-title">Directions</h3>
-          {distance && (
-            <p className="directions-summary">
-              Total distance: <strong>{formatDistance(distance)}</strong>
-            </p>
-          )}
+          <div className="directions-summary">
+            {distance && (
+              <span className="summary-item">
+                📏 <strong>{formatDistance(distance)}</strong>
+              </span>
+            )}
+            {estimatedTime && (
+              <span className="summary-item">
+                ⏱️ <strong>{estimatedTime.display}</strong>
+              </span>
+            )}
+          </div>
         </div>
         <button
           className="directions-close"

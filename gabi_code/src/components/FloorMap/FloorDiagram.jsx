@@ -1,11 +1,18 @@
 // Floor diagram using the actual image as background
 function FloorDiagram({ floor = 1 }) {
-  // Use the same floor plan image for both floors since they have the same layout
+  // Use different floor plan images for each floor
+  const floorImages = {
+    1: "/images/floor1-plan.png",
+    2: "/images/floor2-plan.png"
+  }
+  
+  const imagePath = floorImages[floor] || floorImages[1]
+  
   return (
     <g className="floor-diagram">
       {/* Use the actual floor plan image as background */}
       <image
-        href="/images/floor-plan.png"
+        href={imagePath}
         x="0"
         y="0"
         width="1700"

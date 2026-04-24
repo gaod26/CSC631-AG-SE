@@ -31,9 +31,22 @@
 }
 
 .directions-summary {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin: 0;
+  margin-top: 8px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.summary-item {
+  color: #6b7280;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary-item strong {
+  color: #1f2937;
 }
 
 .directions-close {

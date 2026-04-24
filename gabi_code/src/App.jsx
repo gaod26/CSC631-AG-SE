@@ -3,7 +3,10 @@ import Header from './components/Layout/Header'
 import Sidebar from './components/Layout/Sidebar'
 import FloorMap from './components/FloorMap/FloorMap'
 import DirectionsList from './components/RouteDisplay/DirectionsList'
+import AuthModal from './components/Auth/AuthModal'
+import HistoryPanel from './components/History/HistoryPanel'
 import { generateRoute, getAllRooms } from './services/routeService'
+import { getUser, logout as authLogout, isAuthenticated } from './services/authService'
 import './App.css'
 
 function App() {
@@ -16,10 +19,20 @@ function App() {
   const [error, setError] = useState(null)
   const [rooms, setRooms] = useState([])
   const [showDirections, setShowDirections] = useState(false)
+  
+  // Authentication state
+  const [user, setUser] = useState(null)
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showHistoryPanel, setShowHistoryPanel] = useState(false)
 
   useEffect(() => {
     // Load available rooms
     loadRooms()
+    
+    // Check for existing authentication
+    if (isAuthenticated()) {
+      setUser(getUser())
+    }
   }, [])
 
   const loadRooms = async () => {
@@ -85,9 +98,33 @@ function App() {
     setSelectedFloor(floor)
   }
 
+  // Authentication handlers
+  const handleAuthSuccess = (authenticatedUser) => {
+    setUser(authenticatedUser)
+    setShowAuthModal(false)
+  }
+
+  const handleLogout = () => {
+    authLogout()
+    setUser(null)
+    setShowHistoryPanel(false)
+  }
+
+  const handleSelectRouteFromHistory = (origin, dest, pref) => {
+    setStartLocation(origin)
+    setDestination(dest)
+    setPreference(pref || 'no_preference')
+    setShowHistoryPanel(false)
+  }
+
   return (
     <div className="app">
-      <Header />
+      <Header 
+        user={user}
+        onLoginClick={() => setShowAuthModal(true)}
+        onLogout={handleLogout}
+        onHistoryClick={() => setShowHistoryPanel(true)}
+      />
       
       <div className="app-content">
         <Sidebar
@@ -125,11 +162,27 @@ function App() {
             <DirectionsList
               directions={routeData.directions}
               distance={routeData.distance}
+              estimatedTime={routeData.estimated_time}
               onClose={() => setShowDirections(false)}
             />
           )}
         </main>
       </div>
+
+      {/* Modals */}
+      {showAuthModal && (
+        <AuthModal
+          onClose={() => setShowAuthModal(false)}
+          onAuthSuccess={handleAuthSuccess}
+        />
+      )}
+
+      {showHistoryPanel && (
+        <HistoryPanel
+          onClose={() => setShowHistoryPanel(false)}
+          onSelectRoute={handleSelectRouteFromHistory}
+        />
+      )}
     </div>
   )
 }
