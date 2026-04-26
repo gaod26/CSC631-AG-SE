@@ -34,7 +34,11 @@ function estimateTime({ path, nodeById, adjacency }) {
 
     if (fromFloor !== null && toFloor !== null && fromFloor !== toFloor) {
       // ── Cross-floor segment: add transition time, no walking distance ──
-      const floorDiff = Math.abs(fromFloor - toFloor);
+      const FLOOR_NUMERIC = { "B": -1, 0: 0, 1: 1, 2: 2, 3: 3,
+                              "0": 0, "1": 1, "2": 2, "3": 3 };
+      const fromN = FLOOR_NUMERIC[fromFloor];
+      const toN = FLOOR_NUMERIC[toFloor];
+      const floorDiff = (fromN != null && toN != null) ? Math.abs(fromN - toN) : 1;
       const fromType = fromNode ? fromNode.type : null;
       const toType = toNode ? toNode.type : null;
 

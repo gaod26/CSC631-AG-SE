@@ -17,11 +17,7 @@ router.get("/", (req, res) => {
 
   let floors = listFloors();
   if (floorParam !== undefined) {
-    if (!/^\d+$/.test(String(floorParam))) {
-      return res.status(400).json({ detail: "Floor parameter must be a positive integer" });
-    }
-    const n = Number(floorParam);
-    floors = [n];
+    floors = [String(floorParam)];
   }
 
   const results = [];

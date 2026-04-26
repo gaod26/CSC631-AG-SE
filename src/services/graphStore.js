@@ -109,13 +109,13 @@ for (const floorNumber of floorNodesMap.keys()) {
 
 // ─── Public interface (unchanged) ─────────────────────────────────────────────
 function listFloors() {
+  const FLOOR_ORDER = { "B": -1, "0": 0, "1": 1, "2": 2, "3": 3 };
   return Object.keys(FLOOR_DATA)
-    .map((k) => Number(k))
-    .sort((a, b) => a - b);
+    .sort((a, b) => (FLOOR_ORDER[a] ?? 99) - (FLOOR_ORDER[b] ?? 99));
 }
 
 function getFloor(floorNumber) {
-  const f = FLOOR_DATA[Number(floorNumber)];
+  const f = FLOOR_DATA[String(floorNumber)];
   return f || null;
 }
 
