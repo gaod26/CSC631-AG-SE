@@ -1134,5 +1134,693 @@
     "floor": 2,
     "x": 584,
     "y": 168
+  },
+  {
+    "node_id": "R001",
+    "label": "Room 001",
+    "type": "room",
+    "floor": 0,
+    "x": -771.5,
+    "y": -338
+  },
+  {
+    "node_id": "R001A",
+    "label": "Room 001A",
+    "type": "room",
+    "floor": 0,
+    "x": -642,
+    "y": -366
+  },
+  {
+    "node_id": "R001B",
+    "label": "Room 001B",
+    "type": "room",
+    "floor": 0,
+    "x": -659,
+    "y": -486.5
+  },
+  {
+    "node_id": "R001C",
+    "label": "Room 001C",
+    "type": "room",
+    "floor": 0,
+    "x": -788.5,
+    "y": -486.5
+  },
+  {
+    "node_id": "R001D",
+    "label": "Room 001D",
+    "type": "room",
+    "floor": 0,
+    "x": -904,
+    "y": -463.5
+  },
+  {
+    "node_id": "R001E",
+    "label": "Room 001E",
+    "type": "room",
+    "floor": 0,
+    "x": -904,
+    "y": -315
+  },
+  {
+    "node_id": "R001F",
+    "label": "Room 001F",
+    "type": "room",
+    "floor": 0,
+    "x": -881,
+    "y": -180.5
+  },
+  {
+    "node_id": "R001G",
+    "label": "Room 001G",
+    "type": "room",
+    "floor": 0,
+    "x": -729.5,
+    "y": -180.5
+  },
+  {
+    "node_id": "R002A",
+    "label": "Room 002A",
+    "type": "room",
+    "floor": 0,
+    "x": -918.5,
+    "y": 179
+  },
+  {
+    "node_id": "R003",
+    "label": "Room 003",
+    "type": "room",
+    "floor": 0,
+    "x": -704.5,
+    "y": 146.5
+  },
+  {
+    "node_id": "R004",
+    "label": "Room 004",
+    "type": "room",
+    "floor": 0,
+    "x": -783,
+    "y": 307.5
+  },
+  {
+    "node_id": "R004A",
+    "label": "Room 004A",
+    "type": "room",
+    "floor": 0,
+    "x": -811.5,
+    "y": 146.5
+  },
+  {
+    "node_id": "R004B",
+    "label": "Room 004B",
+    "type": "room",
+    "floor": 0,
+    "x": -918.5,
+    "y": 340
+  },
+  {
+    "node_id": "R004C",
+    "label": "Room 004C",
+    "type": "room",
+    "floor": 0,
+    "x": -904,
+    "y": 462.5
+  },
+  {
+    "node_id": "R004D",
+    "label": "Room 004D",
+    "type": "room",
+    "floor": 0,
+    "x": -769,
+    "y": 462.5
+  },
+  {
+    "node_id": "R004E",
+    "label": "Room 004E",
+    "type": "room",
+    "floor": 0,
+    "x": -648,
+    "y": 443.5
+  },
+  {
+    "node_id": "R004F",
+    "label": "Room 004F",
+    "type": "room",
+    "floor": 0,
+    "x": -648,
+    "y": 316.5
+  },
+  {
+    "node_id": "R010",
+    "label": "Room 010",
+    "type": "room",
+    "floor": 0,
+    "x": -124.5,
+    "y": -204.5
+  },
+  {
+    "node_id": "R011",
+    "label": "Room 011",
+    "type": "room",
+    "floor": 0,
+    "x": -556,
+    "y": 251.5
+  },
+  {
+    "node_id": "R012",
+    "label": "Room 012",
+    "type": "room",
+    "floor": 0,
+    "x": -456.5,
+    "y": 264
+  },
+  {
+    "node_id": "R013",
+    "label": "Room 013",
+    "type": "room",
+    "floor": 0,
+    "x": -340,
+    "y": 264
+  },
+  {
+    "node_id": "R014",
+    "label": "Room 014",
+    "type": "room",
+    "floor": 0,
+    "x": -224,
+    "y": 264
+  },
+  {
+    "node_id": "R015",
+    "label": "Room 015",
+    "type": "room",
+    "floor": 0,
+    "x": -27,
+    "y": 179
+  },
+  {
+    "node_id": "R016",
+    "label": "Room 016",
+    "type": "room",
+    "floor": 0,
+    "x": 217,
+    "y": 153.5
+  },
+  {
+    "node_id": "R017",
+    "label": "Room 017",
+    "type": "room",
+    "floor": 0,
+    "x": 407,
+    "y": -65.5
+  },
+  {
+    "node_id": "R018",
+    "label": "Room 018",
+    "type": "room",
+    "floor": 0,
+    "x": 217,
+    "y": -223
+  },
+  {
+    "node_id": "R020",
+    "label": "Room 020",
+    "type": "room",
+    "floor": 0,
+    "x": 649.5,
+    "y": -416.5
+  },
+  {
+    "node_id": "R021",
+    "label": "Room 021",
+    "type": "room",
+    "floor": 0,
+    "x": 760.5,
+    "y": -231
+  },
+  {
+    "node_id": "R022",
+    "label": "Room 022",
+    "type": "room",
+    "floor": 0,
+    "x": 787,
+    "y": -9
+  },
+  {
+    "node_id": "R023",
+    "label": "Room 023",
+    "type": "room",
+    "floor": 0,
+    "x": 760.5,
+    "y": 209.5
+  },
+  {
+    "node_id": "R024",
+    "label": "Room 024",
+    "type": "room",
+    "floor": 0,
+    "x": 649.5,
+    "y": 389
+  },
+  {
+    "node_id": "H001",
+    "label": "Hallway Node 1",
+    "type": "hallway",
+    "floor": 0,
+    "x": -796,
+    "y": -17
+  },
+  {
+    "node_id": "H002",
+    "label": "Hallway Node 2",
+    "type": "hallway",
+    "floor": 0,
+    "x": -642,
+    "y": -265
+  },
+  {
+    "node_id": "H003",
+    "label": "Hallway Node 3",
+    "type": "hallway",
+    "floor": 0,
+    "x": -623,
+    "y": -180.5
+  },
+  {
+    "node_id": "H004",
+    "label": "Hallway Node 4",
+    "type": "hallway",
+    "floor": 0,
+    "x": -623,
+    "y": 146.5
+  },
+  {
+    "node_id": "H005",
+    "label": "Hallway Node 5",
+    "type": "hallway",
+    "floor": 0,
+    "x": -648,
+    "y": 231
+  },
+  {
+    "node_id": "H006",
+    "label": "Hallway Node 6",
+    "type": "hallway",
+    "floor": 0,
+    "x": -495.5,
+    "y": -213.5
+  },
+  {
+    "node_id": "H007",
+    "label": "Hallway Node 7",
+    "type": "hallway",
+    "floor": 0,
+    "x": -275.5,
+    "y": -16.5
+  },
+  {
+    "node_id": "H008",
+    "label": "Hallway Node 8",
+    "type": "hallway",
+    "floor": 0,
+    "x": -379.5,
+    "y": 163.5
+  },
+  {
+    "node_id": "H009",
+    "label": "Hallway Node 9",
+    "type": "hallway",
+    "floor": 0,
+    "x": -131,
+    "y": 180
+  },
+  {
+    "node_id": "H010",
+    "label": "Hallway Node 10",
+    "type": "hallway",
+    "floor": 0,
+    "x": 428,
+    "y": -291
+  },
+  {
+    "node_id": "H011",
+    "label": "Hallway Node 11",
+    "type": "hallway",
+    "floor": 0,
+    "x": 445.5,
+    "y": -191
+  },
+  {
+    "node_id": "H012",
+    "label": "Hallway Node 12",
+    "type": "hallway",
+    "floor": 0,
+    "x": 463,
+    "y": 41.5
+  },
+  {
+    "node_id": "H013",
+    "label": "Hallway Node 13",
+    "type": "hallway",
+    "floor": 0,
+    "x": 428,
+    "y": 212.5
+  },
+  {
+    "node_id": "H014",
+    "label": "Hallway Node 14",
+    "type": "hallway",
+    "floor": 0,
+    "x": 652.5,
+    "y": -235.5
+  },
+  {
+    "node_id": "H015",
+    "label": "Hallway Node 15",
+    "type": "hallway",
+    "floor": 0,
+    "x": 612.5,
+    "y": -56.5
+  },
+  {
+    "node_id": "H016",
+    "label": "Hallway Node 16",
+    "type": "hallway",
+    "floor": 0,
+    "x": 648,
+    "y": 167
+  },
+  {
+    "node_id": "S001",
+    "label": "Stairwell 1 Floor 0",
+    "type": "stairs",
+    "floor": 0,
+    "x": -495,
+    "y": -292
+  },
+  {
+    "node_id": "S002",
+    "label": "Stairwell 2 Floor 0",
+    "type": "stairs",
+    "floor": 0,
+    "x": -300,
+    "y": 80
+  },
+  {
+    "node_id": "S003",
+    "label": "Stairwell 3 Floor 0",
+    "type": "stairs",
+    "floor": 0,
+    "x": 541.5,
+    "y": -275.5
+  },
+  {
+    "node_id": "S004",
+    "label": "Stairwell 4 Floor 0",
+    "type": "stairs",
+    "floor": 0,
+    "x": 537,
+    "y": 251.5
+  },
+  {
+    "node_id": "E001",
+    "label": "Elevator 1 Floor 0",
+    "type": "elevator",
+    "floor": 0,
+    "x": -476,
+    "y": 79.5
+  },
+  {
+    "node_id": "E002",
+    "label": "Elevator 2 Floor 0",
+    "type": "elevator",
+    "floor": 0,
+    "x": 572.5,
+    "y": 64.5
+  },
+  {
+    "node_id": "M001",
+    "label": "Men's Restroom 1",
+    "type": "mens_restroom",
+    "floor": 0,
+    "x": -524.5,
+    "y": -118
+  },
+  {
+    "node_id": "M002",
+    "label": "Men's Restroom 2",
+    "type": "mens_restroom",
+    "floor": 0,
+    "x": 501.5,
+    "y": 149
+  },
+  {
+    "node_id": "W001",
+    "label": "Women's Restroom 1",
+    "type": "womens_restroom",
+    "floor": 0,
+    "x": -373.5,
+    "y": -118
+  },
+  {
+    "node_id": "W002",
+    "label": "Women's Restroom 2",
+    "type": "womens_restroom",
+    "floor": 0,
+    "x": 559,
+    "y": -191
+  },
+  {
+    "node_id": "O001",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": -344.5,
+    "y": -307.5
+  },
+  {
+    "node_id": "O002",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": -344.5,
+    "y": -221
+  },
+  {
+    "node_id": "O003",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": -555,
+    "y": 79.5
+  },
+  {
+    "node_id": "O004",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": 70.5,
+    "y": -62.5
+  },
+  {
+    "node_id": "O005",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": 187.5,
+    "y": -61
+  },
+  {
+    "node_id": "O006",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": 572.5,
+    "y": 149
+  },
+  {
+    "node_id": "O007",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": 924,
+    "y": -68
+  },
+  {
+    "node_id": "O008",
+    "label": "---",
+    "type": "other",
+    "floor": 0,
+    "x": 924,
+    "y": 52
+  },
+  {
+    "node_id": "RB01A",
+    "label": "Room B01A",
+    "type": "room",
+    "floor": "B",
+    "x": -268,
+    "y": 231
+  },
+  {
+    "node_id": "RB01B",
+    "label": "Room B01B",
+    "type": "room",
+    "floor": "B",
+    "x": -484.5,
+    "y": 231
+  },
+  {
+    "node_id": "RB02",
+    "label": "Room B02",
+    "type": "room",
+    "floor": "B",
+    "x": -780.5,
+    "y": 322.5
+  },
+  {
+    "node_id": "RB03",
+    "label": "Room B03",
+    "type": "room",
+    "floor": "B",
+    "x": -750.5,
+    "y": -20.5
+  },
+  {
+    "node_id": "RB04",
+    "label": "Room B04",
+    "type": "room",
+    "floor": "B",
+    "x": -750,
+    "y": -201.5
+  },
+  {
+    "node_id": "RB04A",
+    "label": "Room B04A",
+    "type": "room",
+    "floor": "B",
+    "x": -623,
+    "y": -268
+  },
+  {
+    "node_id": "RB06",
+    "label": "Room B06",
+    "type": "room",
+    "floor": "B",
+    "x": -228.5,
+    "y": -119.5
+  },
+  {
+    "node_id": "HB01",
+    "label": "Hallway Node 1",
+    "type": "hallway",
+    "floor": "B",
+    "x": -750,
+    "y": 100.5
+  },
+  {
+    "node_id": "HB02",
+    "label": "Hallway Node 2",
+    "type": "hallway",
+    "floor": "B",
+    "x": -623,
+    "y": -23
+  },
+  {
+    "node_id": "HB03",
+    "label": "Hallway Node 3",
+    "type": "hallway",
+    "floor": "B",
+    "x": -495.5,
+    "y": -214
+  },
+  {
+    "node_id": "HB04",
+    "label": "Hallway Node 4",
+    "type": "hallway",
+    "floor": "B",
+    "x": -377.5,
+    "y": -15
+  },
+  {
+    "node_id": "HB05",
+    "label": "Hallway Node 5",
+    "type": "hallway",
+    "floor": "B",
+    "x": -193.5,
+    "y": 78
+  },
+  {
+    "node_id": "SB01",
+    "label": "Stairwell 1 Floor B",
+    "type": "stairs",
+    "floor": "B",
+    "x": -495.5,
+    "y": -296.5
+  },
+  {
+    "node_id": "SB02",
+    "label": "Stairwell 2 Floor B",
+    "type": "stairs",
+    "floor": "B",
+    "x": -329,
+    "y": 78
+  },
+  {
+    "node_id": "EB01",
+    "label": "Elevator 1 Floor B",
+    "type": "elevator",
+    "floor": "B",
+    "x": -473,
+    "y": 78
+  },
+  {
+    "node_id": "MB01",
+    "label": "Men's Restroom 1",
+    "type": "mens_restroom",
+    "floor": "B",
+    "x": -524.5,
+    "y": -119.5
+  },
+  {
+    "node_id": "WB01",
+    "label": "Women's Restroom 1",
+    "type": "womens_restroom",
+    "floor": "B",
+    "x": -375.5,
+    "y": -119.5
+  },
+  {
+    "node_id": "OB01",
+    "label": "---",
+    "type": "other",
+    "floor": "B",
+    "x": -315,
+    "y": -310
+  },
+  {
+    "node_id": "OB02",
+    "label": "---",
+    "type": "other",
+    "floor": "B",
+    "x": -315,
+    "y": -227.5
+  },
+  {
+    "node_id": "OB03",
+    "label": "---",
+    "type": "other",
+    "floor": "B",
+    "x": -554,
+    "y": 78
+  },
+  {
+    "node_id": "OB04",
+    "label": "---",
+    "type": "other",
+    "floor": "B",
+    "x": -197,
+    "y": -266.5
   }
 ]
