@@ -13,6 +13,7 @@ const ALLOWED_TYPES = new Set([
   "elevator",
   "mens_restroom",
   "womens_restroom",
+  "all_gender_restroom",
 ]);
 
 /**
@@ -50,7 +51,7 @@ router.get("/", (req, res) => {
   if (!ALLOWED_TYPES.has(t)) {
     return res.status(400).json({
       detail:
-        "Invalid type: must be one of stairs, elevator, mens_restroom, womens_restroom",
+        "Invalid type: must be one of stairs, elevator, mens_restroom, womens_restroom, all_gender_restroom",
     });
   }
 

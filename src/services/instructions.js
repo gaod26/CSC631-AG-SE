@@ -3,6 +3,13 @@ function nodeDisplay(node) {
   return node.label || node.node_id;
 }
 
+function floorDisplayName(floor) {
+  const f = String(floor);
+  if (f === "B") return "Basement";
+  if (f === "0") return "Ground Floor";
+  return "Floor " + f;
+}
+
 function nodeKindForSentence(node) {
   if (!node) return "location";
   switch (node.type) {
@@ -18,6 +25,8 @@ function nodeKindForSentence(node) {
       return "men's restroom";
     case "womens_restroom":
       return "women's restroom";
+    case "all_gender_restroom":
+      return "all-gender restroom";
     case "room":
       return "room";
     default:
@@ -60,7 +69,7 @@ function buildInstructionsForPath({ path, nodeById }) {
       if (nextNode && node && node.floor !== nextNode.floor) {
         // Floor transition: emit one instruction and skip the landing node.
         const cleanLabel = (node.label || node.node_id).replace(/\s+Floor\s+\d+$/i, "");
-        instructions.push(`Take ${cleanLabel} from Floor ${node.floor} to Floor ${nextNode.floor}`);
+        instructions.push(`Take ${cleanLabel} from ${floorDisplayName(node.floor)} to ${floorDisplayName(nextNode.floor)}`);
         i++; // skip the arriving stairs/elevator node on the next floor
       } else {
         instructions.push(`Continue toward ${nodeDisplay(node)}`);

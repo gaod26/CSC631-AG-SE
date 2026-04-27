@@ -14,6 +14,13 @@ function normalizeType(type) {
   ) {
     return "womens_restroom";
   }
+  if (
+    t === "all-gender restroom" ||
+    t === "all gender restroom" ||
+    t === "all-gender_restroom"
+  ) {
+    return "all_gender_restroom";
+  }
   return t.replace(/\s+/g, "_");
 }
 
